@@ -1,0 +1,44 @@
+.cardLayout {
+    display: block;
+    max-width: 422px;
+    padding: 8px;
+    cursor: pointer;
+}
+.cardImgDiv {
+    width: 100%;
+    background-color: #F9F9F8;
+}
+.cardImgDiv img {
+    width: 100%;
+    mix-blend-mode: multiply;
+}
+.cardLayout:hover {
+    box-shadow: 0px 0px 8px grey;
+}
+.cardImgDiv img:hover {
+    transform: scale(1.03);
+    transition: 0.3s ease-in-out;
+}
+.cardLayout h3,
+.cardLayout p {
+    text-align: left;
+    font-size: 14px;
+    font-family: Raleway, sans-serif;
+    color: #000;
+    font-weight: 600;
+}
+.cardLayout .color {
+    font-weight: 300;
+}
+.cardLayout .priceC {
+    font-weight: 500;
+    margin-top: 10px;
+}
+@media only screen and (max-width: 496px) {
+    .cardLayout {
+        min-width: 320px;
+    }
+    .cardImgDiv img {
+        width: 300px;
+    }
+}
