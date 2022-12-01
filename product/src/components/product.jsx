@@ -33,6 +33,7 @@ import {
 } from '@chakra-ui/react'
 
 import { ChevronDownIcon } from '@chakra-ui/icons'
+import { filter } from 'lodash';
 
 
 
@@ -42,39 +43,78 @@ import { ChevronDownIcon } from '@chakra-ui/icons'
 const Products = () => {
 
 
-  const [gender,setGender] = useState("")
+      const [gender,setGender] = useState("");
+      const [collection,setCollection] = useState("");
+
+      const [filter,setFilter] = useState([]);
+    console.log(gender);
+
     const media = useMediaQuery('min-width:768px');
 
+console.log(collection);
 
-     const changeGender=(gen)=>{
-               setGender(gen);
-               console.log(gender)
-     }
 
+    //filterData
+      
+    const collectionFilter=()=>{
+
+      if(collection!=""){
+
+        if(collection==='none'){
+            setData(filter)
+        }
+        else{
+            const filters = filter.filter(elem=>{
+                return elem.subCat===collection
+            })
+            setData(filters);
+            console.log(filters)
+        }
+      }
+    }
+    const filterGenderData=()=>{
+
+      if(gender!=""){
+
+        if(gender==='none'){
+            setData(filter)
+        }
+        else{
+            const filters = filter.filter(elem=>{
+                return elem.category=== gender
+            })
+            setData(filters);
+        }
+      }
+    }
 
     const [data, setData] = useState([]);
 
     useEffect(() => {
         getProducts();
-
     }, [])
 
+    useEffect(()=>{
+        filterGenderData();
+        collectionFilter();
+    },[gender,collection])
     const getProducts = async () => {
 
         let res = await fetch(`https://collection-mart-default-rtdb.firebaseio.com/product.json`)
         let data = await res.json()
         setData(data)
+        setFilter(data)
         console.log(data);
 
 
     }
-   
- 
+
+
     return (
 
         <>
             <Box w='100%' h='36px' bg={'#f7f7f7'}>
-                <Text opacity='0.7' margin='auto' fontSize='xs' align={'center'} >buy 2 or more pairs, get 20% with the code blackfri</Text>
+                <Text opacity='0.7' pt={'8px'} fontSize='xs' align={'center'} >buy 2 or more pairs, get 20% with the code blackfri</Text>
             </Box>
             <Text mr='63.5%' fontSize='22px' color='black' fontFamily='Raleway,Sans-serif' fontWeight='550'>men's classic slippers</Text>
             <Flex width={'40%'} ml='10%' mt='0.7%' mb='0.7%'>
@@ -102,10 +142,14 @@ const Products = () => {
                         genders
                     </MenuButton>
                     <MenuList fontSize='3xl' direction='column' fontFamily='Raleway,Sans-serif' border='none'  >
-                        <RadioGroup   >
-                            <Stack   >
-                                <Radio size='sm' value='1' onClick={() => changeGender("mens")} >men</Radio>
-                                <Radio size='sm' value='2'>women</Radio>
+                        <RadioGroup  onChange={
+                            setGender
+                            // filterGenderData
+                        } value={gender}  >
+                            <Stack>
+                                <Radio size='sm' value='none' >none</Radio>
+                                <Radio size='sm' value='mens' >men</Radio>
+                                <Radio size='sm' value='womens' >women</Radio>
                             </Stack>
                         </RadioGroup>
                     </MenuList>
@@ -183,8 +227,11 @@ const Products = () => {
                         collection
                     </MenuButton>
                     <MenuList fontFamily='Raleway,Sans-serif' display='grid' border='none'>
-                        <RadioGroup>
+                        <RadioGroup onChange={setCollection} value={collection}>
                             <Stack>
+                                <Radio value='none' opacity='0.7' size='sm' colorScheme='blue'  >
+                                    none
+                                </Radio>
                                 <Radio value='classic' opacity='0.7' size='sm' colorScheme='blue'  >
                                     classic
                                 </Radio>
@@ -328,8 +375,8 @@ const Products = () => {
                 </Menu>
             </Flex >
 
-            <Grid  w='80%' templateColumns={media ? 'repeat(3,1fr)' : 'repeat(2,1fr)'} justifyContent='center' margin='auto' rowGap='35'   >
-                {data.map((ele) => {
+            <Grid w='80%' templateColumns={media ? 'repeat(3,1fr)' : 'repeat(2,1fr)'} justifyContent='center' margin='auto' rowGap='35'   >
+                {data && data.map((ele) => {
                     return (
                         <div key={ele.id} className="cardLayout">
                             <div className="cardImgDiv">
