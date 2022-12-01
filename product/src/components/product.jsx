@@ -43,49 +43,87 @@ import { filter } from 'lodash';
 const Products = () => {
 
 
-      const [gender,setGender] = useState("");
-      const [collection,setCollection] = useState("");
+    const [gender, setGender] = useState("");
+    const [collection, setCollection] = useState("");
+    const [sorts, setSorting] = useState("");
 
-      const [filter,setFilter] = useState([]);
+
+    const [filter, setFilter] = useState([]);
     console.log(gender);
 
     const media = useMediaQuery('min-width:768px');
 
-console.log(collection);
+    console.log(collection);
+
+
+
+
+    //sorting
+
+    const priceSorting = () => {
+
+        if (sorts != "") {
+
+            if (sorts === 'none') {
+                setData(filter)
+                console.log(filter);
+            }
+            else if (sorts === 'lth') {
+                var sortFun = data.sort(function (a, b) {
+                    return parseInt(a.price) - parseInt(b.price)
+
+                })
+                setData(sortFun);
+                console.log(sortFun)
+
+            } else {
+
+
+                var sortFun1 = data.sort(function (a, b) {
+                    return parseInt(b.price) - parseInt(a.price)
+
+                })
+                setData(sortFun1);
+                console.log(sortFun1)
+
+            }
+
+        }
+    }
 
 
     //filterData
-      
-    const collectionFilter=()=>{
 
-      if(collection!=""){
+    const collectionFilter = () => {
 
-        if(collection==='none'){
-            setData(filter)
+        if (collection != "") {
+
+            if (collection === 'none') {
+                setData(filter)
+            }
+            else {
+                const filters = filter.filter(elem => {
+                    return elem.subCat === collection
+                })
+                setData(filters);
+                console.log(filters)
+            }
         }
-        else{
-            const filters = filter.filter(elem=>{
-                return elem.subCat===collection
-            })
-            setData(filters);
-            console.log(filters)
-        }
-      }
     }
-    const filterGenderData=()=>{
+    const filterGenderData = () => {
 
-      if(gender!=""){
+        if (gender != "") {
 
-        if(gender==='none'){
-            setData(filter)
+            if (gender === 'none') {
+                setData(filter)
+            }
+            else {
+                const filters = filter.filter(elem => {
+                    return elem.category === gender
+                })
+                setData(filters);
+            }
         }
-        else{
-            const filters = filter.filter(elem=>{
-                return elem.category=== gender
-            })
-            setData(filters);
-        }
-      }
     }
 
     const [data, setData] = useState([]);
@@ -94,10 +132,14 @@ console.log(collection);
         getProducts();
     }, [])
 
-    useEffect(()=>{
+    useEffect(() => {
         filterGenderData();
         collectionFilter();
-    },[gender,collection])
+        priceSorting()
+    }, [gender, collection, sorts])
+
+
+    //fetching data
     const getProducts = async () => {
 
         let res = await fetch(`https://collection-mart-default-rtdb.firebaseio.com/product.json`)
@@ -142,7 +184,7 @@ console.log(collection);
                         genders
                     </MenuButton>
                     <MenuList fontSize='3xl' direction='column' fontFamily='Raleway,Sans-serif' border='none'  >
-                        <RadioGroup  onChange={
+                        <RadioGroup onChange={
                             setGender
                             // filterGenderData
                         } value={gender}  >
@@ -358,15 +400,15 @@ console.log(collection);
                         sort by price
                     </MenuButton>
                     <MenuList fontFamily='Raleway,Sans-serif' display='grid' border='none' >
-                        <RadioGroup>
+                        <RadioGroup onChange={setSorting} value={sorts} >
                             <Stack>
-                                <Radio value='red' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    ₹ 5000 - ₹ 10,000
+                                <Radio value='none' opacity='0.7' size='sm' colorScheme='blue'  >
+                                    none
                                 </Radio>
-                                <Radio value='green' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    ₹ 10,000 - ₹ 20,000
+                                <Radio value='lth' opacity='0.7' size='sm' colorScheme='blue'  >
+                                    ₹ 8,000 - ₹ 20,000
                                 </Radio>
-                                <Radio value='black' opacity='0.7' size='sm' colorScheme='blue'  >
+                                <Radio value='htl' opacity='0.7' size='sm' colorScheme='blue'  >
                                     above - ₹ 20,000
                                 </Radio>
                             </Stack>
