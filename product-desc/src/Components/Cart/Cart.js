@@ -23,7 +23,7 @@ function Cart() {
   //   setCount(count - 1);
   // };
 
-  let cartArray = JSON.parse(localStorage.getItem("cart"));
+  let cartArray = JSON.parse(localStorage.getItem("cart")) || [];
 
   const deleteProduct = (i) => {
     cartArray.splice(i, 1);
