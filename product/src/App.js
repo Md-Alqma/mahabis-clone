@@ -1,6 +1,7 @@
 import React from 'react';
 import { Products } from './components/product';
 import './App.css';
+import {Skeletons} from './components/skeleton';
 
 
 function App() {

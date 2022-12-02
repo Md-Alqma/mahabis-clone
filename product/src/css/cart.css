@@ -34,11 +34,11 @@
     font-weight: 500;
     margin-top: 10px;
 }
-@media only screen and (max-width: 496px) {
-    .cardLayout {
-        min-width: 320px;
-    }
-    .cardImgDiv img {
-        width: 300px;
+.gridProduct{
+    grid-template-columns: repeat(3,1fr);
+}
+@media only screen and (max-width: 768px) {
+    .gridProduct{
+        grid-template-columns: repeat(2,1fr);
     }
 }

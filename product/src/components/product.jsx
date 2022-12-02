@@ -24,7 +24,7 @@ import {
 
 } from '@chakra-ui/react'
 import '../css/cart.css'
-
+import { Skeletons } from './skeleton'
 import {
 
     RadioGroup,
@@ -51,7 +51,7 @@ const Products = () => {
     const [filter, setFilter] = useState([]);
     console.log(gender);
 
-    const media = useMediaQuery('min-width:768px');
+    const media = useMediaQuery('max-width:768px');
 
     console.log(collection);
 
@@ -153,288 +153,298 @@ const Products = () => {
 
 
     return (
+        <Flex justifyContent={'center'}>
+            <Box width={'100%'} maxW='1240px'>
+                <Box w='100%' h='36px' bg={'#f7f7f7'}>
+                    <Text opacity='0.7' pt={'8px'} fontSize='xs' align={'center'} >buy 2 or more pairs, get 20% with the code blackfri</Text>
+                </Box>
+                <Text ml={'16px'} textAlign={'left'} fontSize='22px' color='black' fontFamily='Raleway,Sans-serif' fontWeight='550'>men's classic slippers</Text>
+                <Flex flexWrap={'wrap'} >
+                    <Menu  >
+                        <MenuButton fontSize='13px' color='#7D7B7C' fontFamily='Raleway,Sans-serif' as={Button} border='none' opacity='1.7' bg='none' _hover={{
+                            background: "none",
+                            color: "black",
+                            fontWeight: '500',
+                            opacity: '5'
 
-        <>
-            <Box w='100%' h='36px' bg={'#f7f7f7'}>
-                <Text opacity='0.7' pt={'8px'} fontSize='xs' align={'center'} >buy 2 or more pairs, get 20% with the code blackfri</Text>
-            </Box>
-            <Text mr='63.5%' fontSize='22px' color='black' fontFamily='Raleway,Sans-serif' fontWeight='550'>men's classic slippers</Text>
-            <Flex width={'40%'} ml='10%' mt='0.7%' mb='0.7%'>
-                <Menu  >
-                    <MenuButton fontSize='13px' color='#7D7B7C' fontFamily='Raleway,Sans-serif' as={Button} border='none' opacity='1.7' bg='none' _hover={{
-                        background: "none",
-                        color: "black",
-                        fontWeight: '500',
-                        opacity: '5'
+                        }}
 
-                    }}
-
-                        _focus={
-                            {
-                                background: "none",
-                                // boxShadow: 'outline',
-                                border: "none"
-                            }
-                        }
-
-
-                        rightIcon={<ChevronDownIcon />}
-
-                    >
-                        genders
-                    </MenuButton>
-                    <MenuList fontSize='3xl' direction='column' fontFamily='Raleway,Sans-serif' border='none'  >
-                        <RadioGroup onChange={
-                            setGender
-                            // filterGenderData
-                        } value={gender}  >
-                            <Stack>
-                                <Radio size='sm' value='none' >none</Radio>
-                                <Radio size='sm' value='mens' >men</Radio>
-                                <Radio size='sm' value='womens' >women</Radio>
-                            </Stack>
-                        </RadioGroup>
-                    </MenuList>
-
-                </Menu>
-
-                <Menu fontFamily='Raleway,Sans-serif'>
-                    <MenuButton fontSize='13px' color='#7D7B7C' fontFamily='Raleway,Sans-serif' as={Button} border='none' opacity='1.7' bg='none' _hover={{
-                        background: "none",
-                        color: "black",
-                        fontWeight: '500',
-                        opacity: '5'
-
-                    }}
-
-                        _focus={
-                            {
-                                background: "none",
-                                // boxShadow: 'outline',
-                                border: "none"
+                            _focus={
+                                {
+                                    background: "none",
+                                    // boxShadow: 'outline',
+                                    border: "none"
+                                }
                             }
 
-                        }
 
+                            rightIcon={<ChevronDownIcon />}
 
-                        rightIcon={<ChevronDownIcon />}
-                    >
-                        size
-                    </MenuButton>
-                    <MenuList opacity='1.7' fontFamily='Raleway,Sans-serif' display='grid' border='none'>
-                        <RadioGroup>
-                            <Stack>
-                                <Radio value='31' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    31
-                                </Radio>
-                                <Radio value='32' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    32
-                                </Radio>
-                                <Radio value='33' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    33
-                                </Radio>
-                                <Radio value='34' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    34
-                                </Radio>
-                                <Radio value='35' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    35
-                                </Radio>
-                                <Radio value='36' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    36
-                                </Radio>
-                            </Stack>
-                        </RadioGroup>
+                        >
+                            genders
+                        </MenuButton>
+                        <MenuList fontSize='3xl' direction='column' fontFamily='Raleway,Sans-serif' border='none'  >
+                            <RadioGroup onChange={
+                                setGender
+                                // filterGenderData
+                            } value={gender}  >
+                                <Stack>
+                                    <Radio size='sm' value='none' >none</Radio>
+                                    <Radio size='sm' value='mens' >men</Radio>
+                                    <Radio size='sm' value='womens' >women</Radio>
+                                </Stack>
+                            </RadioGroup>
+                        </MenuList>
 
-                    </MenuList>
-                </Menu>
+                    </Menu>
 
-                <Menu fontFamily='Raleway,Sans-serif' >
-                    <MenuButton color='#7D7B7C' fontSize='13px' fontFamily='Raleway,Sans-serif' id='remove' as={Button} border='none' opacity='1.7' bg='none' _hover={{
-                        background: "none",
-                        color: "black",
-                        fontWeight: '500',
-                        opacity: '5'
+                    <Menu fontFamily='Raleway,Sans-serif'>
+                        <MenuButton fontSize='13px' color='#7D7B7C' fontFamily='Raleway,Sans-serif' as={Button} border='none' opacity='1.7' bg='none' _hover={{
+                            background: "none",
+                            color: "black",
+                            fontWeight: '500',
+                            opacity: '5'
 
-                    }}
+                        }}
 
-                        _focus={
-                            {
-                                background: "none",
-                                // boxShadow: 'outline',
-                                border: "none"
+                            _focus={
+                                {
+                                    background: "none",
+                                    // boxShadow: 'outline',
+                                    border: "none"
+                                }
+
                             }
-                        }
-                        rightIcon={<ChevronDownIcon />}
-                    >
-                        collection
-                    </MenuButton>
-                    <MenuList fontFamily='Raleway,Sans-serif' display='grid' border='none'>
-                        <RadioGroup onChange={setCollection} value={collection}>
-                            <Stack>
-                                <Radio value='none' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    none
-                                </Radio>
-                                <Radio value='classic' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    classic
-                                </Radio>
-                                <Radio value='curve' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    curve
-                                </Radio>
-                                <Radio value='mule' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    mule
-                                </Radio>
-                                <Radio value='breathe' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    breathe
-                                </Radio>
-                            </Stack>
-                        </RadioGroup>
 
-                    </MenuList>
-                </Menu>
 
-                <Menu  >
-                    <MenuButton color='#7D7B7C' fontSize='13px' fontFamily='Raleway,Sans-serif' id='remove' as={Button} border='none' opacity='1.7' bg='none' _hover={{
-                        background: "none",
-                        color: "black",
-                        fontWeight: '500',
-                        opacity: '5'
+                            rightIcon={<ChevronDownIcon />}
+                        >
+                            size
+                        </MenuButton>
+                        <MenuList opacity='1.7' fontFamily='Raleway,Sans-serif' display='grid' border='none'>
+                            <RadioGroup>
+                                <Stack>
+                                    <Radio value='31' opacity='0.7' size='sm' colorScheme='blue'  >
+                                        31
+                                    </Radio>
+                                    <Radio value='32' opacity='0.7' size='sm' colorScheme='blue'  >
+                                        32
+                                    </Radio>
+                                    <Radio value='33' opacity='0.7' size='sm' colorScheme='blue'  >
+                                        33
+                                    </Radio>
+                                    <Radio value='34' opacity='0.7' size='sm' colorScheme='blue'  >
+                                        34
+                                    </Radio>
+                                    <Radio value='35' opacity='0.7' size='sm' colorScheme='blue'  >
+                                        35
+                                    </Radio>
+                                    <Radio value='36' opacity='0.7' size='sm' colorScheme='blue'  >
+                                        36
+                                    </Radio>
+                                </Stack>
+                            </RadioGroup>
 
-                    }}
+                        </MenuList>
+                    </Menu>
 
-                        _focus={
-                            {
-                                background: "none",
-                                // boxShadow: 'outline',
-                                border: "none"
+                    <Menu fontFamily='Raleway,Sans-serif' >
+                        <MenuButton color='#7D7B7C' fontSize='13px' fontFamily='Raleway,Sans-serif' id='remove' as={Button} border='none' opacity='1.7' bg='none' _hover={{
+                            background: "none",
+                            color: "black",
+                            fontWeight: '500',
+                            opacity: '5'
+
+                        }}
+
+                            _focus={
+                                {
+                                    background: "none",
+                                    // boxShadow: 'outline',
+                                    border: "none"
+                                }
                             }
-                        }
-                        rightIcon={<ChevronDownIcon />}
-                    >
-                        upper color
-                    </MenuButton>
-                    <MenuList fontFamily='Raleway,Sans-serif' display='grid' border='none'>
-                        <RadioGroup>
-                            <Stack>
-                                <Radio value='blue' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    blue
-                                </Radio>
-                                <Radio value='red' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    red
-                                </Radio>
+                            rightIcon={<ChevronDownIcon />}
+                        >
+                            collection
+                        </MenuButton>
+                        <MenuList fontFamily='Raleway,Sans-serif' display='grid' border='none'>
+                            <RadioGroup onChange={setCollection} value={collection}>
+                                <Stack>
+                                    <Radio value='none' opacity='0.7' size='sm' colorScheme='blue'  >
+                                        none
+                                    </Radio>
+                                    <Radio value='classic' opacity='0.7' size='sm' colorScheme='blue'  >
+                                        classic
+                                    </Radio>
+                                    <Radio value='curve' opacity='0.7' size='sm' colorScheme='blue'  >
+                                        curve
+                                    </Radio>
+                                    <Radio value='mule' opacity='0.7' size='sm' colorScheme='blue'  >
+                                        mule
+                                    </Radio>
+                                    <Radio value='breathe' opacity='0.7' size='sm' colorScheme='blue'  >
+                                        breathe
+                                    </Radio>
+                                </Stack>
+                            </RadioGroup>
 
-                                <Radio value='gray' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    gray
-                                </Radio>
+                        </MenuList>
+                    </Menu>
 
-                                <Radio value='animRadio' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    animal print
-                                </Radio>
-                            </Stack>
-                        </RadioGroup>
-                    </MenuList>
-                </Menu>
+                    <Menu  >
+                        <MenuButton color='#7D7B7C' fontSize='13px' fontFamily='Raleway,Sans-serif' id='remove' as={Button} border='none' opacity='1.7' bg='none' _hover={{
+                            background: "none",
+                            color: "black",
+                            fontWeight: '500',
+                            opacity: '5'
 
-                <Menu  >
-                    <MenuButton color='#7D7B7C' opacity='1.7' fontSize='13px' fontFamily='Raleway,Sans-serif' id='remove' as={Button} border='none' bg='none' _hover={{
-                        background: "none",
-                        color: "black",
-                        fontWeight: '500',
-                        opacity: '5'
+                        }}
 
-                    }}
-
-                        _focus={
-                            {
-                                background: "none",
-                                // boxShadow: 'outline',
-                                border: "none"
+                            _focus={
+                                {
+                                    background: "none",
+                                    // boxShadow: 'outline',
+                                    border: "none"
+                                }
                             }
-                        }
-                        rightIcon={<ChevronDownIcon />}
-                    >
-                        sole color
-                    </MenuButton>
-                    <MenuList fontFamily='Raleway,Sans-serif' display='grid' border='none' >
-                        <RadioGroup>
-                            <Stack>
-                                <Radio value='red' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    red
-                                </Radio>
-                                <Radio value='green' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    green
-                                </Radio>
-                                <Radio value='black' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    black
-                                </Radio>
-                                <Radio value='yellow' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    yellow
-                                </Radio>
-                                <Radio value='blue' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    blue
-                                </Radio>
-                            </Stack>
-                        </RadioGroup>
-                    </MenuList>
-                </Menu>
+                            rightIcon={<ChevronDownIcon />}
+                        >
+                            upper color
+                        </MenuButton>
+                        <MenuList fontFamily='Raleway,Sans-serif' display='grid' border='none'>
+                            <RadioGroup>
+                                <Stack>
+                                    <Radio value='blue' opacity='0.7' size='sm' colorScheme='blue'  >
+                                        blue
+                                    </Radio>
+                                    <Radio value='red' opacity='0.7' size='sm' colorScheme='blue'  >
+                                        red
+                                    </Radio>
 
+                                    <Radio value='gray' opacity='0.7' size='sm' colorScheme='blue'  >
+                                        gray
+                                    </Radio>
 
+                                    <Radio value='animRadio' opacity='0.7' size='sm' colorScheme='blue'  >
+                                        animal print
+                                    </Radio>
+                                </Stack>
+                            </RadioGroup>
+                        </MenuList>
+                    </Menu>
 
-                <Menu  >
-                    <MenuButton color='#7D7B7C' fontSize='13px' fontFamily='Raleway,Sans-serif' as={Button} border='none' opacity='1.7' bg='none' _hover={{
-                        background: "none",
-                        color: "black",
-                        fontWeight: '500',
-                        opacity: '5'
+                    <Menu  >
+                        <MenuButton color='#7D7B7C' opacity='1.7' fontSize='13px' fontFamily='Raleway,Sans-serif' id='remove' as={Button} border='none' bg='none' _hover={{
+                            background: "none",
+                            color: "black",
+                            fontWeight: '500',
+                            opacity: '5'
 
-                    }}
+                        }}
 
-                        _focus={
-                            {
-                                background: "none",
-                                // boxShadow: 'outline',
-                                border: "none"
+                            _focus={
+                                {
+                                    background: "none",
+                                    // boxShadow: 'outline',
+                                    border: "none"
+                                }
                             }
-                        }
-                        rightIcon={<ChevronDownIcon />}
-                    >
-                        sort by price
-                    </MenuButton>
-                    <MenuList fontFamily='Raleway,Sans-serif' display='grid' border='none' >
-                        <RadioGroup onChange={setSorting} value={sorts} >
-                            <Stack>
-                                <Radio value='none' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    none
-                                </Radio>
-                                <Radio value='lth' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    ₹ 8,000 - ₹ 20,000
-                                </Radio>
-                                <Radio value='htl' opacity='0.7' size='sm' colorScheme='blue'  >
-                                    above - ₹ 20,000
-                                </Radio>
-                            </Stack>
-                        </RadioGroup>
-                    </MenuList>
-                </Menu>
-            </Flex >
+                            rightIcon={<ChevronDownIcon />}
+                        >
+                            sole color
+                        </MenuButton>
+                        <MenuList fontFamily='Raleway,Sans-serif' display='grid' border='none' >
+                            <RadioGroup>
+                                <Stack>
+                                    <Radio value='red' opacity='0.7' size='sm' colorScheme='blue'  >
+                                        red
+                                    </Radio>
+                                    <Radio value='green' opacity='0.7' size='sm' colorScheme='blue'  >
+                                        green
+                                    </Radio>
+                                    <Radio value='black' opacity='0.7' size='sm' colorScheme='blue'  >
+                                        black
+                                    </Radio>
+                                    <Radio value='yellow' opacity='0.7' size='sm' colorScheme='blue'  >
+                                        yellow
+                                    </Radio>
+                                    <Radio value='blue' opacity='0.7' size='sm' colorScheme='blue'  >
+                                        blue
+                                    </Radio>
+                                </Stack>
+                            </RadioGroup>
+                        </MenuList>
+                    </Menu>
 
-            <Grid w='80%' templateColumns={media ? 'repeat(3,1fr)' : 'repeat(2,1fr)'} justifyContent='center' margin='auto' rowGap='35'   >
-                {data && data.map((ele) => {
-                    return (
-                        <div key={ele.id} className="cardLayout">
-                            <div className="cardImgDiv">
-                                <img src={ele.image.img1} alt="" />
+
+
+                    <Menu  >
+                        <MenuButton color='#7D7B7C' fontSize='13px' fontFamily='Raleway,Sans-serif' as={Button} border='none' opacity='1.7' bg='none' _hover={{
+                            background: "none",
+                            color: "black",
+                            fontWeight: '500',
+                            opacity: '5'
+
+                        }}
+
+                            _focus={
+                                {
+                                    background: "none",
+                                    // boxShadow: 'outline',
+                                    border: "none"
+                                }
+                            }
+                            rightIcon={<ChevronDownIcon />}
+                        >
+                            sort by price
+                        </MenuButton>
+                        <MenuList fontFamily='Raleway,Sans-serif' display='grid' border='none' >
+                            <RadioGroup onChange={setSorting} value={sorts} >
+                                <Stack>
+                                    <Radio value='none' opacity='0.7' size='sm' colorScheme='blue'  >
+                                        none
+                                    </Radio>
+                                    <Radio value='htl' opacity='0.7' size='sm' colorScheme='blue'  >
+                                        ₹ 5,000 - ₹ 12,000
+                                    </Radio>
+                                    <Radio value='lth' opacity='0.7' size='sm' colorScheme='blue'  >
+                                        above - ₹ 12,000
+                                    </Radio>
+                                </Stack>
+                            </RadioGroup>
+                        </MenuList>
+                    </Menu>
+                </Flex >
+
+                <Grid width={'100%'} justifyContent='center' gap={'16px'} padding='0 8px' className='gridProduct' >
+                    {data.length > 0 ? data.map((ele) => {
+                        return (
+                            <div key={ele.id} className="cardLayout">
+                                <div className="cardImgDiv">
+                                    <img src={ele.image.img1} alt="" />
+                                </div>
+                                <h3>{ele.title}</h3>
+                                <p className="color">{ele.color}</p>
+                                <p className="priceC">₹‌{ele.price}</p>
                             </div>
-                            <h3>{ele.title}</h3>
-                            <p className="color">{ele.color}</p>
-                            <p className="priceC">₹‌{ele.price}</p>
-                        </div>
 
 
-                    )
-                })}
-            </Grid>
-        </>
+                        )
+                    }) : <Flex gap={'16px'}>
+                        <Skeletons />
+                        <Skeletons />
+                        <Skeletons />
+                        <Skeletons />
+                        <Skeletons />
+                        <Skeletons />
+                        <Skeletons />
+                        <Skeletons />
 
+                    </Flex>}
+                </Grid>
+            </Box>
+        </Flex>
 
     )
 }
